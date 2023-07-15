@@ -1,6 +1,6 @@
 import Popup from "../popup/Popup";
 
-export default function InfoTooltip({ name, isSuccess, isOpen, onClose }) {
+export default function InfoTooltip({ name, isSuccess, successText, failText, isOpen, onClose }) {
   return (
     <Popup name={name} isOpen={isOpen} onClose={onClose}>
       <div className="popup__form">
@@ -11,8 +11,8 @@ export default function InfoTooltip({ name, isSuccess, isOpen, onClose }) {
         />
         <p className="popup__success-text">
           {isSuccess
-            ? "Вы успешно зарегистрировались"
-            : "Что-то пошло не так! Попробуйте еще раз."}
+            ? successText
+            : failText}
         </p>
       </div>
     </Popup>

@@ -8,7 +8,7 @@ import api from "../utils/api";
 import EditProfilePopup from "./editProfilePopup/EditProfilePopup";
 import AddPlacePopup from "./addPlacePopup/AddPlacePopup";
 import EditAvatarPopup from "./editAvatarPopup/EditAvatarPopup";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate, Link } from "react-router-dom";
 import auth from "../utils/auth";
 import ProtectedElement from "./protectedElement/ProtectedElement";
 import ProtectedProfile from "./protectedProfile/ProtectedProfile";
@@ -152,9 +152,11 @@ function App() {
     if (jwt) {
       auth
         .checkToken(jwt)
-        .then(() => {
+        .then((res) => {
+          console.log(res);
           setLoggedIn(true);
-          navigate("/sign-in");
+          setProfileEmail(res.data.email);
+          navigate("/");
         })
         .catch(console.error);
     } else {
@@ -250,6 +252,8 @@ function App() {
 
           <InfoTooltip
             name="result"
+            successText="Вы успешно зарегистрировались"
+            failText="Что-то пошло не так! Попробуйте еще раз."
             isSuccess={isSuccess}
             isOpen={isResultPopupOpen}
             onClose={closeAllPopups}
